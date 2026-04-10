@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gingerlaser's Math Website</title>
+
+    <style>
+        /* Reset & base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: #0d1117;
+            color: #e6edf3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: #161b22;
+            border-bottom: 1px solid #30363d;
+            height: 125px;
+        }
+
+        header h1 {
+            font-size: rem;
+        }
+
+        nav a {
+            font-size: 1rem;
+            color: #9da7b3;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #e6edf3;
+        }
+
+        /* Main section */
+        .container {
+            padding: 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        /* Cards */
+        .card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            width: 350px;
+            height: 250px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            /*box-shadow: 0 8px 20px #30363d;*/
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h2 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .card-content p {
+            font-size: 0.9rem;
+            color: #9da7b3;
+        }
+
+        /* Footer (optional but nice) */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Gingerlaser's Math Website</h1>
+        <nav>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+
+            <a href="linear-algebra.html">
+                <div class="card">
+                    <!--<img src="https://via.placeholder.com/400x200?text=Linear+Algebra" alt="Linear Algebra">-->
+                    <div class="card-content">
+                        <h2>Linear Algebra</h2>
+                    </div>
+                </div>
+            </a>
+
+            <a href="calculus.html">
+                <div class="card">
+                    <!--<img src="https://via.placeholder.com/400x200?text=Calculus" alt="Calculus">-->
+                    <div class="card-content">
+                        <h2>Calculus</h2>
+                    </div>
+                </div>
+            </a>
+
+            <a href="trigonometry.html">
+                <div class="card">
+                    <!--<img src="https://via.placeholder.com/400x200?text=Trigonometry" alt="Trigonometry">-->
+                    <div class="card-content">
+                        <h2>Trigonometry</h2>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
