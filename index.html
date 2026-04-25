@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gingerlaser's Math Website</title>
+    <title>The Ginger Laser</title>
 
     <style>
-        /* Reset & base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 400;
         }
 
         body {
@@ -29,14 +32,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            padding: 20px 75px;
             background-color: #161b22;
             border-bottom: 1px solid #30363d;
             height: 125px;
         }
 
         header h1 {
-            font-size: rem;
+            font-size: 1.8rem;
         }
 
         nav a {
@@ -49,17 +52,56 @@
             color: #e6edf3;
         }
 
-        /* Main section */
+        /* Layout */
         .container {
-            padding: 40px;
-            max-width: 1200px;
-            margin: auto;
+            padding: 50px 80px;
         }
 
+        /* Sections */
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            cursor: pointer;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .arrow {
+            font-size: 1.6rem;
+            color: #9da7b3;
+            transition: transform 0.3s ease;
+        }
+
+            .section-content {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.4s ease;
+        }
+
+        .section-content .inner {
+            padding-top: 25px;
+        }
+
+        .section.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Grid */
+        
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            gap: 37.5px;
         }
 
         /* Cards */
@@ -68,15 +110,13 @@
             border: 1px solid #30363d;
             border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s;
             cursor: pointer;
-            width: 350px;
             height: 250px;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            /*box-shadow: 0 8px 20px #30363d;*/
         }
 
         .card img {
@@ -99,57 +139,94 @@
             color: #9da7b3;
         }
 
-        /* Footer (optional but nice) */
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #8b949e;
-        }
     </style>
 </head>
 
 <body>
 
     <header>
-        <h1>Gingerlaser's Math Website</h1>
+        <h1>The Ginger Laser</h1>
         <nav>
             <a href="about.html">About</a>
         </nav>
     </header>
 
     <div class="container">
-        <div class="grid">
 
-            <a href="linear-algebra.html">
-                <div class="card">
-                    <!--<img src="https://via.placeholder.com/400x200?text=Linear+Algebra" alt="Linear Algebra">-->
-                    <div class="card-content">
-                        <h2>Linear Algebra</h2>
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Math</h2>
+                <span class="arrow">▾</span>
+            </div>
+            <div class="section-content">
+                <div class="inner">
+                    <div class="grid">
+
+                        <a href="linear-algebra.html">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h2>Linear Algebra</h2>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="calculus.html">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h2>Calculus</h2>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="trigonometry.html">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h2>Trigonometry</h2>
+                                </div>
+                            </div>
+                        </a>
+
                     </div>
                 </div>
-            </a>
-
-            <a href="calculus.html">
-                <div class="card">
-                    <!--<img src="https://via.placeholder.com/400x200?text=Calculus" alt="Calculus">-->
-                    <div class="card-content">
-                        <h2>Calculus</h2>
-                    </div>
-                </div>
-            </a>
-
-            <a href="trigonometry.html">
-                <div class="card">
-                    <!--<img src="https://via.placeholder.com/400x200?text=Trigonometry" alt="Trigonometry">-->
-                    <div class="card-content">
-                        <h2>Trigonometry</h2>
-                    </div>
-                </div>
-            </a>
-
+            </div>
         </div>
+
+        <div class="section"><div class="section-header" onclick="toggleSection(this)"><h2>Physics</h2><span class="arrow">▾</span></div><div class="section-content"><div class="inner"></div></div></div>
+        <div class="section"><div class="section-header" onclick="toggleSection(this)"><h2>Biology</h2><span class="arrow">▾</span></div><div class="section-content"><div class="inner"></div></div></div>
+        <div class="section"><div class="section-header" onclick="toggleSection(this)"><h2>Chemistry</h2><span class="arrow">▾</span></div><div class="section-content"><div class="inner"></div></div></div>
+        <div class="section"><div class="section-header" onclick="toggleSection(this)"><h2>Entomology</h2><span class="arrow">▾</span></div><div class="section-content"><div class="inner"></div></div></div>
+        <div class="section"><div class="section-header" onclick="toggleSection(this)"><h2>Ornithology</h2><span class="arrow">▾</span></div><div class="section-content"><div class="inner"></div></div></div>
+        <div class="section"><div class="section-header" onclick="toggleSection(this)"><h2>Anatomy</h2><span class="arrow">▾</span></div><div class="section-content"><div class="inner"></div></div></div>
+        <div class="section"><div class="section-header" onclick="toggleSection(this)"><h2>French</h2><span class="arrow">▾</span></div><div class="section-content"><div class="inner"></div></div></div>
+        <div class="section"><div class="section-header" onclick="toggleSection(this)"><h2>Russian</h2><span class="arrow">▾</span></div><div class="section-content"><div class="inner"></div></div></div>
+
     </div>
 
+    <script>
+        function toggleSection(header) {
+            const section = header.parentElement;
+            const content = section.querySelector(".section-content");
+
+            if (section.classList.contains("open")) {
+                // CLOSE
+                content.style.height = content.scrollHeight + "px"; // set current height
+                requestAnimationFrame(() => {
+                    content.style.height = "0px";
+                });
+                section.classList.remove("open");
+            } else {
+                // OPEN
+                content.style.height = content.scrollHeight + "px";
+                section.classList.add("open");
+
+                // After animation, reset to auto so it adapts to content
+                content.addEventListener("transitionend", function handler() {
+                    content.style.height = "auto";
+                    content.removeEventListener("transitionend", handler);
+                });
+            }
+        }
+    </script>
+    
 </body>
 </html>
