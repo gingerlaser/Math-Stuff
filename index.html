@@ -1,204 +1,926 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ginger Laser</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>The Ginger Laser</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --bg:#eef2f5;
+    --bg-2:#e7edf2;
+
+    --sidebar:#f8fafb;
+    --panel:#fbfcfd;
+
+    --border:#b8c4cf;
+    --border-soft:#c7d1da;
+
+    --text:#23303b;
+    --muted:#697582;
+
+    --accent:#5f8fb7;
+    --accent-hover:#4e7da4;
+    --accent-soft:#e7f0f7;
+
+    --shadow:
+        0 10px 24px rgba(18,28,38,0.05),
+        0 2px 6px rgba(18,28,38,0.04);
+
+    --shadow-hover:
+        0 14px 34px rgba(18,28,38,0.08),
+        0 4px 12px rgba(18,28,38,0.06);
+
+    --radius-large:24px;
+    --radius-medium:18px;
+    --radius-small:14px;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at top left,rgba(255,255,255,0.7),transparent 28%),
+        var(--bg);
+
+    color:var(--text);
+
+    font-family:"Manrope",sans-serif;
+
+    display:flex;
+
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+h1,
+h2{
+    font-family:"Cormorant Garamond",serif;
+    font-weight:500;
+    letter-spacing:0.02em;
+}
+
+/* Sidebar */
+
+header{
+
+    width:325px;
+    min-width:325px;
+
+    position:sticky;
+    top:0;
+
+    height:100vh;
+
+    padding:42px;
+
+    display:flex;
+    flex-direction:column;
+
+    background:rgba(248,250,251,0.92);
+
+    backdrop-filter:blur(10px);
+
+    border-right:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+    z-index:20;
+
+    overflow:visible;
+}
+
+.settings-button{
+
+    position:absolute;
+
+    top:24px;
+    right:24px;
+
+    width:42px;
+    height:42px;
+
+    border-radius:var(--radius-small);
+
+    border:1px solid var(--border);
+
+    background:#f3f6f8;
+
+    color:var(--muted);
+
+    display:grid;
+    place-items:center;
+
+    cursor:pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+    font-size:1rem;
+}
+
+.settings-button:hover{
+
+    background:var(--accent-soft);
+
+    border-color:#9fb5c7;
+
+    color:var(--accent-hover);
+
+    transform:translateY(-1px);
+}
+
+.sidebar-top{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:16px;
+
+    margin-bottom:34px;
+}
+
+header h1{
+
+    font-size:3.15rem;
+    line-height:0.92;
+}
+
+.tagline{
+
+    color:var(--muted);
+
+    font-size:0.96rem;
+
+    line-height:1.7;
+
+    max-width:240px;
+}
+
+/* Navigation */
+
+.nav-links{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:12px;
+}
+
+nav a{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding:15px 18px;
+
+    border-radius:16px;
+
+    border:1px solid transparent;
+
+    color:var(--muted);
+
+    background:transparent;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+nav a:hover{
+
+    background:#f1f5f8;
+
+    border-color:var(--border-soft);
+
+    color:var(--text);
+
+    transform:translateX(2px);
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.04);
+}
+
+nav a.active{
+
+    background:var(--accent-soft);
+
+    border:1px solid #aebfce;
+
+    color:var(--accent-hover);
+
+    box-shadow:0 4px 12px rgba(95,143,183,0.08);
+}
+
+.nav-icon{
+
+    width:18px;
+
+    font-size:0.95rem;
+}
+
+/* Main */
+
+.container{
+
+    flex:1;
+
+    width:100%;
+    max-width:1600px;
+
+    padding:56px clamp(24px,5vw,82px);
+
+    overflow:visible;
+}
+
+.page-title{
+
+    margin-bottom:36px;
+}
+
+.page-title h2{
+
+    font-size:3rem;
+}
+
+/* Sections */
+
+.section{
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius-large);
+
+    overflow:visible;
+
+    margin-bottom:26px;
+
+    box-shadow:var(--shadow);
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+.section:hover{
+
+    transform:translateY(-2px);
+
+    border-color:#aebbc7;
+
+    box-shadow:var(--shadow-hover);
+}
+
+.section-header{
+
+    cursor:pointer;
+
+    padding:30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    border-radius:inherit;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+/* Hover only when CLOSED */
+
+.section:not(.open) .section-header:hover{
+
+    background:#f5f8fa;
+}
+
+.section-header-left{
+
+    display:flex;
+    align-items:center;
+
+    gap:20px;
+}
+
+.section-icon{
+
+    width:52px;
+    height:52px;
+
+    border-radius:16px;
+
+    display:grid;
+    place-items:center;
+
+    font-size:1.25rem;
+
+    background:#f2f6f9;
+
+    border:1px solid #bcc8d3;
+
+    color:var(--accent);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Serif sigma */
+
+.math-icon{
+
+    font-family:"Times New Roman",serif;
+    font-size:1.45rem;
+}
+
+/* Icon changes with header hover */
+
+.section:not(.open) .section-header:hover .section-icon{
+
+    background:var(--accent-soft);
+
+    border-color:#9fb8cb;
+
+    color:var(--accent-hover);
+
+    transform:scale(1.03);
+}
+
+.section-header h2{
+
+    font-size:2rem;
+}
+
+.arrow{
+
+    font-size:1.65rem;
+
+    color:var(--muted);
+
+    transition:
+        transform 0.3s ease,
+        color 0.2s ease;
+}
+
+.section.open .arrow{
+
+    transform:rotate(180deg);
+
+    color:var(--accent);
+}
+
+/* Accordion */
+
+.section-content{
+
+    height:0;
+
+    overflow:hidden;
+
+    transition:height 0.35s ease;
+}
+
+.inner{
+
+    padding:0 30px 30px;
+}
+
+/* Topics */
+
+.topic-list{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:20px;
+
+    overflow:visible;
+}
+
+.topic{
+
+    background:#f6f9fb;
+
+    border:1px solid #bcc8d3;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    position:relative;
+
+    box-shadow:
+        0 2px 8px rgba(18,28,38,0.03);
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        background 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+.topic::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:inherit;
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,0.32),
+        transparent 70%
+    );
+
+    pointer-events:none;
+}
+
+.topic:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#9fb3c3;
+
+    background:#f2f6f9;
+
+    box-shadow:
+        0 10px 22px rgba(18,28,38,0.07),
+        0 3px 8px rgba(18,28,38,0.04);
+}
+
+.topic-title{
+
+    font-size:1.12rem;
+
+    margin-bottom:10px;
+
+    color:var(--text);
+
+    font-weight:600;
+}
+
+.topic-description{
+
+    color:var(--muted);
+
+    line-height:1.72;
+
+    font-size:0.96rem;
+}
+
+/* Subtle page fade */
+
+.section,
+.topic,
+nav a,
+.settings-button{
+    will-change:transform;
+}
+
+/* Mobile */
+
+@media (max-width:950px){
+
+    body{
+        flex-direction:column;
+    }
+
+    header{
+
+        position:relative;
+
+        width:100%;
+        min-width:unset;
+
+        height:auto;
+
+        border-right:none;
+        border-bottom:1px solid var(--border);
+
+        border-radius:0;
+    }
+
+    .container{
+        padding:34px 18px;
+    }
+
+    .page-title h2{
+        font-size:2.35rem;
+    }
+
+    .section-header h2{
+        font-size:1.6rem;
+    }
+
+    .topic-list{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-    <header>
-        <h1>The Ginger Laser</h1>
-        <nav>
-            <a href="index.html">Learn</a>
-        </nav>
-        <nav>
-            <a href="simulations.html">Simulations</a>
-        </nav>
-        <nav>
-            <a href="about.html">About</a>
-        </nav>
-    </header>
+<header>
 
-    <div class="container">
+    <button class="settings-button" aria-label="Settings">
+        ⚙
+    </button>
 
-        <div class="section">
-            <div class="section-header" onclick="toggleSection(this)">
-                <h2>Math</h2>
-                <span class="arrow">▾</span>
-            </div>
-            <div class="section-content">
-                <div class="inner">
-                    <div class="grid">
+    <div class="sidebar-top">
 
-                        <a href="math/calculus.html" class="card">
-                            <div class="card-content">
-                                <h2>Calculus</h2>
-                            </div>
-                        </a>
+        <h1>
+            The<br>
+            Ginger Laser
+        </h1>
 
-                        <a href="math/geometry.html" class="card">
-                            <div class="card-content">
-                                <h2>Geometry</h2>
-                            </div>
-                        </a>
-                        
-                        <a href="math/linear-algebra.html" class="card">
-                            <div class="card-content">
-                                <h2>Linear Algebra</h2>
-                            </div>
-                        </a>
+        <p class="tagline">
+            Hi Kamil, Jean, or whoever's looking at this.
+            I'm not sure what this really is, but uh, welcome.
+        </p>
 
-                        <a href="math/logic.html" class="card">
-                            <div class="card-content">
-                                <h2>Logic</h2>
-                            </div>
-                        </a>
-                        
-                        <a href="math/trigonometry.html" class="card">
-                            <div class="card-content">
-                                <h2>Trigonometry</h2>
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header" onclick="toggleSection(this)">
-                <h2>Biology</h2>
-                <span class="arrow">▾</span>
-            </div>
-            <div class="section-content">
-                <div class="inner">
-                    <div class="grid">
-                        
-                        <a href="biology/anatomy.html" class="card">
-                            <div class="card-content">
-                                <h2>Anatomy</h2>
-                            </div>
-                        </a>
-                        
-                        <a href="biology/biochemistry.html" class="card">
-                            <div class="card-content">
-                                <h2>Biochemistry</h2>
-                            </div>
-                        </a>
-
-                        <a href="biology/botany.html" class="card">
-                            <div class="card-content">
-                                <h2>Botany</h2>
-                            </div>
-                        </a>
-                        
-                        <a href="biology/entomology.html" class="card">
-                            <div class="card-content">
-                                <h2>Entomology</h2>
-                            </div>
-                        </a>
-
-                        <a href="biology/orthinology.html" class="card">
-                            <div class="card-content">
-                                <h2>Orthinology</h2>
-                            </div>
-                        </a>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!--
-        <div class="section">
-            <div class="section-header" onclick="toggleSection(this)">
-                <h2>Chemistry</h2>
-                <span class="arrow">▾</span>
-            </div>
-            <div class="section-content">
-                <div class="inner">
-                    
-                </div>
-            </div>
-        </div>
-        -->
-        
-        <div class="section">
-            <div class="section-header" onclick="toggleSection(this)">
-                <h2>Languages</h2>
-                <span class="arrow">▾</span>
-            </div>
-            <div class="section-content">
-                <div class="inner">
-                    <div class="grid">
-                    
-                        <a href="languages/french.html" class="card">
-                            <div class="card-content">
-                                <h2>French</h2>
-                            </div>
-                        </a>
-    
-                        <a href="languages/german.html" class="card">
-                            <div class="card-content">
-                                <h2>German</h2>
-                            </div>
-                        </a>
-    
-                        <a href="languages/russian.html" class="card">
-                            <div class="card-content">
-                                <h2>Russian</h2>
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!--
-        <div class="section">
-            <div class="section-header" onclick="toggleSection(this)">
-                <h2>Physics</h2>
-                <span class="arrow">▾</span>
-            </div>
-            <div class="section-content">
-                <div class="inner">
-                    
-                </div>
-            </div>
-        </div>
-        -->
-        
     </div>
 
-    <script>
-        function toggleSection(header) {
-            const section = header.parentElement;
-            const content = section.querySelector(".section-content");
+    <nav class="nav-links">
 
-            if (section.classList.contains("open")) {
-                // CLOSE
-                content.style.height = content.scrollHeight + "px"; // set current height
-                requestAnimationFrame(() => {
-                    content.style.height = "0px";
-                });
-                section.classList.remove("open");
-            } else {
-                // OPEN
-                content.style.height = content.scrollHeight + "px";
-                section.classList.add("open");
+        <a href="index.html" class="active">
 
-                // After animation, reset to auto so it adapts to content
-                content.addEventListener("transitionend", function handler() {
-                    content.style.height = "auto";
-                    content.removeEventListener("transitionend", handler);
-                });
-            }
-        }
-    </script>
-    
+            <span class="nav-icon">✦</span>
+
+            Learn
+
+        </a>
+
+        <a href="simulations.html">
+
+            <span class="nav-icon">◈</span>
+
+            Simulations
+
+        </a>
+
+        <a href="about.html">
+
+            <span class="nav-icon">?</span>
+
+            About
+
+        </a>
+
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <div class="page-title">
+
+        <h2>Learn</h2>
+
+    </div>
+
+    <!-- Math -->
+
+    <div class="section">
+
+        <div class="section-header" onclick="toggleSection(this)">
+
+            <div class="section-header-left">
+
+                <div class="section-icon math-icon">∑</div>
+
+                <h2>Math</h2>
+
+            </div>
+
+            <span class="arrow">▾</span>
+
+        </div>
+
+        <div class="section-content">
+
+            <div class="inner">
+
+                <div class="topic-list">
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Calculus
+                        </div>
+
+                        <div class="topic-description">
+                            Limits, derivatives, integrals,
+                            and differential equations? Maybe.
+                        </div>
+
+                    </a>
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Geometry
+                        </div>
+
+                        <div class="topic-description">
+                            General geometry, but also puzzles,
+                            elegant theorems, etc. I think.
+                        </div>
+
+                    </a>
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Linear Algebra
+                        </div>
+
+                        <div class="topic-description">
+                            Vectors, matrices, eigen-stuff,
+                            and things that just make me sad.
+                        </div>
+
+                    </a>
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Logic
+                        </div>
+
+                        <div class="topic-description">
+                            Simple Formal Logic ✧˖°
+                            (Admittedly, I still need to read it)
+                        </div>
+
+                    </a>
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Trigonometry
+                        </div>
+
+                        <div class="topic-description">
+                            I should mention a lot will overlap. 
+                            So yeah, general trig, addition formulas,
+                            integration of functions, etc.
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Biology -->
+
+    <div class="section">
+
+        <div class="section-header" onclick="toggleSection(this)">
+
+            <div class="section-header-left">
+
+                <div class="section-icon">❀</div>
+
+                <h2>Biology</h2>
+
+            </div>
+
+            <span class="arrow">▾</span>
+
+        </div>
+
+        <div class="section-content">
+
+            <div class="inner">
+
+                <div class="topic-list">
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Anatomy
+                        </div>
+
+                        <div class="topic-description">
+                            Structures, systems,
+                            and just, scary stuff.
+                        </div>
+
+                    </a>
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Biochemistry
+                        </div>
+
+                        <div class="topic-description">
+                            Oh no. I guess, explaining why processes like
+                            the ETC work on the molecular level. 
+                            I don't wanna learn Blender though...
+                        </div>
+
+                    </a>
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Botany
+                        </div>
+
+                        <div class="topic-description">
+                            Plant anatomy, classification,
+                            roles, etc.
+                        </div>
+
+                    </a>
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Entomology
+                        </div>
+
+                        <div class="topic-description">
+                            Insect anatomy, classification, roles, 
+                            etc. Bugs are cool.
+                        </div>
+
+                    </a>
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Ornithology
+                        </div>
+
+                        <div class="topic-description">
+                            Same as botany and entomology but 
+                            for birds, + recognizing their calls maybe.
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Languages -->
+
+    <div class="section">
+
+        <div class="section-header" onclick="toggleSection(this)">
+
+            <div class="section-header-left">
+
+                <div class="section-icon">✎</div>
+
+                <h2>Languages</h2>
+
+            </div>
+
+            <span class="arrow">▾</span>
+
+        </div>
+
+        <div class="section-content">
+
+            <div class="inner">
+
+                <div class="topic-list">
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            French
+                        </div>
+
+                        <div class="topic-description">
+                            I don't know what to put here. 
+                            Grammar and vocabulary builders I guess?
+                        </div>
+
+                    </a>
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            German
+                        </div>
+
+                        <div class="topic-description">
+                            Probably just articles and audio for
+                            reading and listening pactice.
+                            I'm familiar with the language already anyway.
+                        </div>
+
+                    </a>
+
+                    <a href="#" class="topic">
+
+                        <div class="topic-title">
+                            Russian
+                        </div>
+
+                        <div class="topic-description">
+                            О боже... declensions, vocabulary, 
+                            prepositions,just grammar in general... 
+                            this language is just, no.
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function toggleSection(header){
+
+    const section=header.parentElement;
+
+    const content=section.querySelector(".section-content");
+
+    if(section.classList.contains("open")){
+
+        content.style.height=content.scrollHeight+"px";
+
+        requestAnimationFrame(()=>{
+
+            content.style.height="0px";
+        });
+
+        section.classList.remove("open");
+
+    }else{
+
+        content.style.height=content.scrollHeight+"px";
+
+        section.classList.add("open");
+
+        content.addEventListener("transitionend",function handler(){
+
+            content.style.height="auto";
+
+            content.removeEventListener("transitionend",handler);
+        });
+    }
+}
+
+</script>
+
 </body>
 </html>
